@@ -23,8 +23,8 @@ const NavBar = () => {
             gap-3
             md-gap-0"
           >
-            <Link href="/" className="font-extrabold text-2xl">
-              E-Shop
+            <Link href="/" className="font-extrabold text-2xl text-orange-500">
+             E-Shop Logo
             </Link>
 
             <div className="hidden md:block">

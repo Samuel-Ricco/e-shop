@@ -38,7 +38,7 @@ const HomeBanner = () => {
               text-white
               mb-2"
             >
-              this is an e-shop i made to improve my skills
+              This is an e-shop i made to improve my skills
             </p>
           </div>
 

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const HomeBanner = () => {
   return (
     <div className="
@@ -42,7 +44,14 @@ const HomeBanner = () => {
             </p>
           </div>
 
-          <div></div>
+          <div className="
+            w-1/5
+            relative
+            aspect-video"
+          >
+            <Image src="/reactLogo.png" fill alt="React Logo" className="object-contain"/>
+
+          </div>
 
         </div>
     </div>

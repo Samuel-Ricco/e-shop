@@ -3,6 +3,7 @@ import Container from './components/container/Container'
 import HomeBanner from './components/home/HomeBanner'
 import { products } from './components/product/products'
 import { TextCutter } from '@/utils/TextCutter'
+import ProductCard from './components/product/productCard/ProductCard'
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
         >
           {products.map((product:any)=>{
             return <div>
-              {TextCutter(product.name)}
+              <ProductCard data={product}></ProductCard>
             </div>
           })}
         </div>

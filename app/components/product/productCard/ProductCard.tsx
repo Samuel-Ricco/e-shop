@@ -16,10 +16,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         border-[1.2px]
         border-slate-200
         bg-slate-50
-        rounded-sm
+        rounded-md
         p-2
+        drop-shadow-lg
         transition
         hover:scale-105
+        hover:drop-shadow-xl
         text-center
         text-sm"
     >
@@ -31,6 +33,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         w-full
         gap-1"
       >
+
+        <div className="mb-4 font-semibold text-xl text-orange-500">{textCutter(data.name)}</div>
+
         <div
           className="
           aspect-square
@@ -49,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           />
         </div>
 
-        <div className="mt-4">{textCutter(data.name)}</div>
+        
 
         <div>
           <Rating value={productRating} readOnly/>
@@ -57,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
         <div>{data.reviews.length} reviews</div>
 
-        <div className="font-semibold">{priceFormatter(data.price)}</div>
+        <div className="font-semibold text-xl">{priceFormatter(data.price)}</div>
       </div>
     </div>
   );

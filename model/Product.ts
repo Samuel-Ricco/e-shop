@@ -7,7 +7,7 @@ class Product {
   category: string;
   inStock: boolean;
   images: ProductImage[];
-  reviews: Review[] | undefined;
+  reviews: Review[];
 
   constructor(
     id: string,
@@ -27,6 +27,7 @@ class Product {
       (this.category = category),
       (this.inStock = inStock),
       (this.images = images);
+      (this.reviews = []);
   }
 
   

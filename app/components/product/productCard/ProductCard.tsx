@@ -4,7 +4,6 @@ import { textCutter } from "@/utils/textCutter";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from 'react';
 
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
@@ -12,7 +11,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const router = useRouter();
 
   const productRating =
-    data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0  ) /
+    data.reviews.reduce((acc: number, item: Review) => item.rating + acc, 0  ) /
     data.reviews.length;
 
   return (

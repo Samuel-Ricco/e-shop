@@ -4,7 +4,7 @@ class Review {
   productId: string;
   rating: number;
   comment: string;
-  createdDate: Date;
+  createdDate: string;
   user: User;
 
   constructor(
@@ -12,7 +12,7 @@ class Review {
     product: Product,
     rating: number,
     comment: string,
-    createdDate: Date,
+    createdDate: string,
     user: User
   ) {
     this.id = id;

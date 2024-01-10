@@ -2,13 +2,13 @@ class User {
   id: string;
   name: string;
   email: string;
-  emailVerified: boolean;
+  emailVerified:null| boolean;
   image: string;
-  hashedPassword: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  hashedPassword:null| string;
+  createdAt: string;
+  updatedAt: string;
   role: string;
-  cart:Product[]
+  cart?:Product[]
 
   constructor(
     id: string,
@@ -16,9 +16,9 @@ class User {
     email: string,
     emailVerified: boolean,
     image: string,
-    hashedPassword: boolean,
-    createdAt: Date,
-    updatedAt: Date,
+    hashedPassword: string,
+    createdAt: string,
+    updatedAt: string,
     role: string
   ) {
     (this.id = id),

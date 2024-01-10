@@ -1,0 +1,3 @@
+interface IParams{
+    productId?:string;
+}

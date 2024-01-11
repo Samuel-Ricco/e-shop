@@ -1,0 +1,3 @@
+interface IProductDetails {
+  productId:string;
+}

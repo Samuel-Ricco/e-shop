@@ -6,17 +6,19 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 
-const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const router = useRouter();
 
+
   const productRating =
-    data.reviews.reduce((acc: number, item: Review) => item.rating + acc, 0  ) /
-    data.reviews.length;
+    product.reviews.reduce((acc: number, item: Review) => item.rating + acc, 0  ) /
+    product.reviews.length;
 
   return (
     <div 
-      onClick={()=>router.push(`/product/${data.id}`)}
+      onClick={()=>router.push(`/product/${product.id}`)}
       className="
         col-span-1
         cursor-pointer
@@ -41,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         gap-1"
       >
 
-        <div className="mb-4 font-semibold text-xl text-orange-500">{textCutter(data.name)}</div>
+        <div className="mb-4 font-semibold text-xl text-orange-500">{textCutter(product.name)}</div>
 
         <div
           className="
@@ -56,8 +58,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             h-full
             object-contain"
             fill
-            src={data.images[0].image}
-            alt={data.name}
+            src={product.images[0].image}
+            alt={product.name}
           />
         </div>
 
@@ -67,9 +69,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           <Rating value={productRating} readOnly/>
         </div>
 
-        <div>{data.reviews.length} reviews</div>
+        <div>{product.reviews.length} reviews</div>
 
-        <div className="font-semibold text-xl">{priceFormatter(data.price)}</div>
+        <div className="font-semibold text-xl">{priceFormatter(product.price)}</div>
       </div>
     </div>
   );

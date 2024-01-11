@@ -24,7 +24,7 @@ export default function Home() {
         >
           {products.map((product:any)=>{
             return <div>
-              <ProductCard data={product}></ProductCard>
+              <ProductCard product={product}></ProductCard>
             </div>
           })}
         </div>

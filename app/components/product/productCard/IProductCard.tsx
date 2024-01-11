@@ -1,3 +1,3 @@
 interface ProductCardProps{
-    data:Product
+    product:Product
 }

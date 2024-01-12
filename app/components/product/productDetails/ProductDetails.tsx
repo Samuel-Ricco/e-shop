@@ -1,7 +1,9 @@
 "use client";
 
 import { ProductHelper } from "@/utils/productHelper";
+import PageLoader from "next/dist/client/page-loader";
 import React, { useEffect } from "react";
+import { TailSpin } from "react-loader-spinner";
 
 const ProductDetails: React.FC<IProductDetails> = ({productId}) => {
 
@@ -25,13 +27,35 @@ const ProductDetails: React.FC<IProductDetails> = ({productId}) => {
       md:grid-cols-2 
       gap-12"
     >
+      {product?
       <div>
-        Images
-      </div>
+        
+        <div>Immagine</div>
 
-      <div>
-        {product? product.name:productId}
+        <div>
+
+          <h2 className="mb-4 font-semibold text-xl text-orange-500">
+            {product.name}
+          </h2>
+
+
+
+        </div>
       </div>
+      :
+      <div className="flex">
+        <TailSpin
+          visible={true}
+          height="80"
+          width="80"
+          color="orange"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+      }
     </div>
   );
 };

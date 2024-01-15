@@ -1,34 +1,27 @@
-class Product {
-  id: string;
-  name: string;
+export class Product {
+  id: number;
+  title: string;
   description: string;
   price: number;
-  brand: string;
   category: string;
-  inStock: boolean;
-  images: ProductImage[];
-  reviews: Review[];
+  image: string;
+  reviews: { count: number; rate: number };
 
   constructor(
-    id: string,
+    id: number,
     name: string,
     description: string,
     price: number,
-    brand: string,
     category: string,
-    inStock: boolean,
-    images: ProductImage[]
+    image: string,
+    reviews: { count: number; rate: number }
   ) {
-    (this.id = id),
-      (this.name = name),
+      (this.id = id),
+      (this.title = name),
       (this.description = description),
       (this.price = price),
-      (this.brand = brand),
       (this.category = category),
-      (this.inStock = inStock),
-      (this.images = images);
-      (this.reviews = []);
+      (this.image = image);
+      this.reviews = reviews;
   }
-
-  
 }

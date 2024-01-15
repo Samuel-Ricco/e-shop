@@ -4,17 +4,13 @@ import { textCutter } from "@/utils/textCutter";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ProductCardProps } from "./IProductCard";
 
 
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const router = useRouter();
-
-
-  const productRating =
-    product.reviews.reduce((acc: number, item: Review) => item.rating + acc, 0  ) /
-    product.reviews.length;
 
   return (
     <div 
@@ -43,7 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         gap-1"
       >
 
-        <div className="mb-4 font-semibold text-xl text-orange-500">{textCutter(product.name)}</div>
+        <div className="mb-4 font-semibold text-xl text-orange-500">{textCutter(product.title)}</div>
 
         <div
           className="
@@ -58,18 +54,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             h-full
             object-contain"
             fill
-            src={product.images[0].image}
-            alt={product.name}
+            src={product.image}
+            alt={product.title}
           />
         </div>
 
         
 
         <div>
-          <Rating value={productRating} readOnly/>
+          <Rating value={product.reviews.rate} readOnly/>
         </div>
 
-        <div>{product.reviews.length} reviews</div>
+        <div>{product.reviews.count} reviews</div>
 
         <div className="font-semibold text-xl">{priceFormatter(product.price)}</div>
       </div>

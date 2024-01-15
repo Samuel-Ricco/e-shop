@@ -4,8 +4,11 @@ import { Product } from "@/model/Product";
 import { ProductHelper } from "@/utils/productHelper";
 import { Rating } from "@mui/material";
 import PageLoader from "next/dist/client/page-loader";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
+import HorizontalLine from "../../styleComponents/HorizontalLine";
+import SetQuantity from "../SetQuantity";
+import { CartProduct } from "@/model/CartProduct";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -22,6 +25,10 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
     getProduct();
   }, []);
 
+  const quantityDecreaseHandeler = useCallback(() => {}, []);
+
+  const quantityIncreaseHandeler = useCallback(() => {}, []);
+
   console.log("product", product);
 
   return (
@@ -33,30 +40,39 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
             grid-cols-1 
             md:grid-cols-2 
             gap-12"
-          >
-         
+        >
+          <div>Immagine</div>
 
-            <div>Immagine</div>
+          <div className="flex flex-col gap-1 text-slate-500 text-sm">
+            <h2 className="mb-4 font-semibold text-3xl text-orange-500">
+              {product.title}
+            </h2>
 
-            <div className="flex flex-col gap-1 text-slate-500 text-sm">
-
-              <h2 className="mb-4 font-semibold text-3xl text-orange-500">
-                {product.title}
-              </h2>
-
-              <div className="flex items-center gap-2">
-                <Rating value={product.reviews.rate} readOnly/>
-                <div>
-                  {product.reviews.count} reviews
-                </div>
-              </div>
-
-              <div>{product.description}</div>
-
-
+            <div className="flex items-center gap-2">
+              <Rating value={product.reviews.rate} readOnly />
+              <div>{product.reviews.count} reviews</div>
             </div>
+
+            <HorizontalLine />
+
+            <div>{product.description}</div>
+
+            <HorizontalLine />
+
+            <div className="flex gap-8 items-center">
+              <span className="font-semibold">CATEGORY: </span>
+              {product.category}
+            </div>
+
+            <HorizontalLine />
+
+            <SetQuantity
+              cartProduct={new CartProduct(product, 1)}
+              quantityDecreaseHandeler={quantityDecreaseHandeler}
+              quantityIncreaseHandeler={quantityIncreaseHandeler}
+            />
           </div>
-        
+        </div>
       ) : (
         <div className="flex justify-center">
           <TailSpin

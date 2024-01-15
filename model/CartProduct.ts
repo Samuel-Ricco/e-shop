@@ -1,7 +1,7 @@
 import { Product } from "./Product";
 
 export class CartProduct {
-  product: Product;
+  product: Product | undefined;
   quantity: number;
 
   constructor(product: Product, quantity: number) {

@@ -12,6 +12,9 @@ import { CartProduct } from "@/model/CartProduct";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
+  const [cartProduct, setCartProduct] = React.useState<CartProduct | null>(
+    null
+  );
 
   useEffect(() => {
     async function getProduct() {
@@ -25,11 +28,34 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
     getProduct();
   }, []);
 
-  const quantityDecreaseHandeler = useCallback(() => {}, []);
+  useEffect(() => {
+    if (product) {
+      setCartProduct(new CartProduct(product, 1));
+    }
+  }, [product]);
 
-  const quantityIncreaseHandeler = useCallback(() => {}, []);
+  const quantityDecreaseHandeler = useCallback(() => {
+    setCartProduct((prev) => {
+      return {
+        ...prev,
+        quantity: (prev?.quantity ?? 0) - 1,
+        product: prev?.product || undefined,
+      };
+    });
+  }, []);
+
+  const quantityIncreaseHandeler = useCallback(() => {
+    setCartProduct((prev) => {
+      return {
+        ...prev,
+        quantity: (prev?.quantity ?? 0) + 1,
+        product: prev?.product || undefined,
+      };
+    });
+  }, []);
 
   console.log("product", product);
+  console.log("cartroduct", cartProduct);
 
   return (
     <div>
@@ -67,8 +93,12 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
             <HorizontalLine />
 
             <SetQuantity
-              cartProduct={new CartProduct(product, 1)}
-              quantityDecreaseHandeler={quantityDecreaseHandeler}
+              cartProduct={
+                cartProduct ? cartProduct : new CartProduct(product, 1)
+              }
+              quantityDecreaseHandeler={
+                cartProduct?.quantity == 1 ? () => {} : quantityDecreaseHandeler
+              }
               quantityIncreaseHandeler={quantityIncreaseHandeler}
             />
           </div>

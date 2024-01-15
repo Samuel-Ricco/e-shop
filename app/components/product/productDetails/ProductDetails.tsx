@@ -9,6 +9,7 @@ import { TailSpin } from "react-loader-spinner";
 import HorizontalLine from "../../styleComponents/HorizontalLine";
 import SetQuantity from "../SetQuantity";
 import { CartProduct } from "@/model/CartProduct";
+import CustomButton from "../../CustomButton";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -69,7 +70,7 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
         >
           <div>Immagine</div>
 
-          <div className="flex flex-col gap-1 text-slate-500 text-sm">
+          <div className="flex flex-col gap-4 text-slate-500 text-sm">
             <h2 className="mb-4 font-semibold text-3xl text-orange-500">
               {product.title}
             </h2>
@@ -101,6 +102,8 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
               }
               quantityIncreaseHandeler={quantityIncreaseHandeler}
             />
+
+            <CustomButton label="Add to Cart" onClick={() =>{} }/>
           </div>
         </div>
       ) : (

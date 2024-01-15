@@ -41,6 +41,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       ${custom? custom : ""}`}
     >
       {Icon && <Icon size={24} />}
+      {label  }
     </button>
   );
 };

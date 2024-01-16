@@ -10,6 +10,7 @@ import HorizontalLine from "../../styleComponents/HorizontalLine";
 import SetQuantity from "../SetQuantity";
 import { CartProduct } from "@/model/CartProduct";
 import CustomButton from "../../CustomButton";
+import Image from "next/image";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -66,9 +67,12 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
             grid 
             grid-cols-1 
             md:grid-cols-2 
-            gap-12"
+            gap-12
+            pt-10"
         >
-          <div>Immagine</div>
+          <div className="xl:mr-80 pl-5 relative aspect-square">
+            <Image className="h-full w-full object-contain max-h-[35rem] min-h-[300px]" src={product.image} fill alt={product.title} />
+          </div>
 
           <div className="flex flex-col gap-4 text-slate-500 text-sm">
             <h2 className="mb-4 font-semibold text-3xl text-orange-500">
@@ -105,6 +109,7 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
 
             <CustomButton label="Add to Cart" onClick={() =>{} }/>
           </div>
+
         </div>
       ) : (
         <div className="flex justify-center">

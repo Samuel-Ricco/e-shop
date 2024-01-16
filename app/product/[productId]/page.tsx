@@ -12,10 +12,6 @@ const Product = async ({params}:{params:IParams}) => {
     console.log("paramssssssssssssssssssss", params)
     await ProductHelper.getProducts();
 
-
-
-    
-
     return ( <div className="p-8">
      <Container>
         <ProductDetails productId={params.productId.toString()}/>

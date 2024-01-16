@@ -1,35 +1,51 @@
 class User {
-  id: string;
-  name: string;
+  id: number;
   email: string;
-  emailVerified:null| boolean;
-  image: string;
-  hashedPassword:null| string;
-  createdAt: string;
-  updatedAt: string;
-  role: string;
-  cart?:Product[]
+  username: string;
+  password: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  address: {
+    city: string;
+    street: string;
+    number: number;
+    zipcode: string;
+    geolocation: {
+      lat: string;
+      long: string;
+    };
+  };
+  phone: string;
 
   constructor(
-    id: string,
-    name: string,
+    id: number,
     email: string,
-    emailVerified: boolean,
-    image: string,
-    hashedPassword: string,
-    createdAt: string,
-    updatedAt: string,
-    role: string
+    username: string,
+    password: string,
+    name: {
+      firstname: string;
+      lastname: string;
+    },
+    address: {
+      city: string;
+      street: string;
+      number: number;
+      zipcode: string;
+      geolocation: {
+        lat: string;
+        long: string;
+      };
+    },
+    phone: string
   ) {
-    (this.id = id),
-      (this.name = name),
-      (this.email = email),
-      (this.emailVerified = emailVerified),
-      (this.image = image),
-      (this.hashedPassword = hashedPassword),
-      (this.createdAt = createdAt),
-      (this.updatedAt = updatedAt),
-      (this.role = role);
-      (this.cart=[]);
+    this.id = id;
+    this.email = email;
+    this.username = username;
+    this.password = password;
+    this.name = name;
+    this.address = address;
+    this.phone = phone;
   }
 }

@@ -32,6 +32,7 @@ export class ProductHelper {
     return products;
   };
 
+  //todo
   static getProductFromId = async (productId: string) => {
     const products = await ProductHelper.getProducts();
     return (

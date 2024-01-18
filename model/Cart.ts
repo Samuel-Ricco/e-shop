@@ -2,17 +2,15 @@ import { CartProduct } from "./CartProduct";
 import { Product } from "./Product";
 
 export class Cart {
-  products: CartProduct[];
+  products: CartProduct[] | undefined;
 
-  constructor(products: CartProduct[]) {
-    this.products = products;
-  }
+  
 
   addProduct(cartProduct: CartProduct) {
     if (this.checkProduct(cartProduct.product)) {
       this.increaseProductQuantity(cartProduct.product, cartProduct.quantity);
     } else {
-      this.products.push(cartProduct);
+      this.products?.push(cartProduct);
     }
   }
 
@@ -20,7 +18,7 @@ export class Cart {
     const productToRemove = this.checkProduct(cartProduct.product);
 
     if (productToRemove) {
-      return this.products.filter((product) => {
+      return this.products?.filter((product) => {
         product !== productToRemove;
       });
     }
@@ -30,7 +28,7 @@ export class Cart {
     const productToIncrease = this.checkProduct(product);
 
     if (productToIncrease) {
-      this.products = this.products.map((cartProduct) => {
+      this.products = this.products?.map((cartProduct) => {
         if (cartProduct.product === product) {
           return { ...cartProduct, quantity: cartProduct.quantity + quantity };
         } else {
@@ -44,7 +42,7 @@ export class Cart {
     const productToDecrease = this.checkProduct(product);
 
     if (productToDecrease) {
-      this.products = this.products.map((cartProduct) => {
+      this.products = this.products?.map((cartProduct) => {
         if (cartProduct.product === product) {
           const newQuantity = Math.max(0, cartProduct.quantity - quantity);
 
@@ -63,7 +61,7 @@ export class Cart {
   }
 
   checkProduct(product: Product): CartProduct | undefined {
-    return this.products.find((x) => x.product === product);
+    return this.products?.find((x) => x.product === product);
   }
 }
 

@@ -19,6 +19,8 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
     null
   );
 
+  const cart = useCart();
+
   useEffect(() => {
     async function getProduct() {
       try {
@@ -29,11 +31,16 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
       }
     }
     getProduct();
+    
   }, []);
 
+  //todo spostare on init
   useEffect(() => {
     if (product) {
-      setCartProduct(new CartProduct(product, 1));
+      console.log("product", product);
+      const newCartProduct = new CartProduct(product, 1)
+      console.log("cartproduct", newCartProduct )
+      setCartProduct(newCartProduct);
     }
   }, [product]);
 
@@ -59,19 +66,14 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
 
   const cartAddProduct = () => {
     if (cartProduct) {
-      useCart((state) => state.addProduct(cartProduct));
+      cart.addProduct(cartProduct);
     }
 
-    console.log("bottone")
-    console.log(
-      "cart",
-      useCart((state) => state.cart)
-    );
+    console.log("bottone");
+    console.log("cart", cart.cart);
   };
 
-  console.log("product", product);
-  console.log("cartroduct", cartProduct);
-
+  
   return (
     <div>
       {product ? (

@@ -3,7 +3,7 @@ const nextConfig = {
     images:{
         domains:["fakestoreapi.com"],
     },
-    // reactStrictMode: false
+    reactStrictMode: false
     
 }
 

@@ -4,3 +4,5 @@ export const textCutter = (str:string)=>{
     }
     return str.substring(0,15) + "...";
 }
+
+//TODO fare con css ellipsis

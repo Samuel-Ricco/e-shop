@@ -11,6 +11,7 @@ import SetQuantity from "../SetQuantity";
 import { CartProduct } from "@/model/CartProduct";
 import CustomButton from "../../CustomButton";
 import Image from "next/image";
+import { useCart } from "@/hooks/CartHooks";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -42,7 +43,7 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
         ...prev,
         quantity: (prev?.quantity ?? 0) - 1,
         product: prev?.product || undefined,
-      };
+      } as CartProduct | null; // Aggiungi questa annotazione di tipo
     });
   }, []);
 
@@ -52,9 +53,21 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
         ...prev,
         quantity: (prev?.quantity ?? 0) + 1,
         product: prev?.product || undefined,
-      };
+      } as CartProduct | null;
     });
   }, []);
+
+  const cartAddProduct = () => {
+    if (cartProduct) {
+      useCart((state) => state.addProduct(cartProduct));
+    }
+
+    console.log("bottone")
+    console.log(
+      "cart",
+      useCart((state) => state.cart)
+    );
+  };
 
   console.log("product", product);
   console.log("cartroduct", cartProduct);
@@ -71,7 +84,12 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
             pt-10"
         >
           <div className="xl:mr-80 pl-5 relative aspect-square">
-            <Image className="h-full w-full object-contain max-h-[35rem] min-h-[300px]" src={product.image} fill alt={product.title} />
+            <Image
+              className="h-full w-full object-contain max-h-[35rem] min-h-[300px]"
+              src={product.image}
+              fill
+              alt={product.title}
+            />
           </div>
 
           <div className="flex flex-col gap-4 text-slate-500 text-sm">
@@ -107,9 +125,8 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
               quantityIncreaseHandeler={quantityIncreaseHandeler}
             />
 
-            <CustomButton label="Add to Cart" onClick={() =>{} }/>
+            <CustomButton label="Add to Cart" onClick={cartAddProduct} />
           </div>
-
         </div>
       ) : (
         <div className="flex justify-center">

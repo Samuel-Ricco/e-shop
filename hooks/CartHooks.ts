@@ -12,6 +12,7 @@ type CartHook = {
   decreaseProductQuantity:(product: Product, quantity: number) => void;
 };
 
+
 export const useCart = create<CartHook>((set)=>({
   cart: new Cart(),
 

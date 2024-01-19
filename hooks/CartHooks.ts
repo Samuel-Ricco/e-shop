@@ -1,48 +1,105 @@
-import { Cart } from "@/model/Cart";
+
 import { CartProduct } from "@/model/CartProduct";
 import { Product } from "@/model/Product";
 import { create } from "zustand";
 
-
 type CartHook = {
-  cart: Cart;
-  addProduct: (cartProduct:CartProduct)=>void;
-  removeProduct:(cartProduct: CartProduct)=>void;
-  increaseProductQuantity:(product: Product, quantity: number) => void;
-  decreaseProductQuantity:(product: Product, quantity: number) => void;
+  products: CartProduct[] | undefined;
+  addProduct: (cartProduct: CartProduct) => void;
+  removeProduct: (cartProduct: CartProduct) => void;
+  increaseProductQuantity: (product: Product, quantity: number) => void;
+  decreaseProductQuantity: (product: Product, quantity: number) => void;
 };
 
+export const useCart = create<CartHook>((set) => ({
+  products: [],
 
-export const useCart = create<CartHook>((set)=>({
-  cart: new Cart(),
-
-  addProduct: (cartProduct:CartProduct) => {
+  addProduct: (cartProduct: CartProduct) => {
     set((state) => {
-      state.cart.addProduct(cartProduct);
-      return { cart: state.cart };
-    })
+
+      const productInCart = foundProductInCart(cartProduct.product, state.products)
+      if (productInCart) {
+        state.products = state.products?.map((productInCart) => {
+          if (productInCart.product === cartProduct.product) {
+            return {
+              ...cartProduct,
+              quantity: productInCart.quantity + cartProduct.quantity,
+            };
+          } else {
+            return cartProduct;
+          }
+        });
+      } else {
+        state.products?.push(cartProduct);
+      }
+
+      return { products: state.products };
+    });
   },
 
-  removeProduct: (cartProduct:CartProduct) => {
+  removeProduct: (cartProduct: CartProduct) => {
     set((state) => {
-      state.cart.removeProduct(cartProduct);
-      return { cart: state.cart };
-    })
+      const productToRemove = foundProductInCart(cartProduct.product, state.products);
+
+      if (productToRemove) {
+        state.products?.filter((product) => {
+          product !== productToRemove;
+        });
+      }
+
+      return { products: state.products };
+    });
   },
 
-  increaseProductQuantity: (product: Product, quantity: number)=>{
+  increaseProductQuantity: (product: Product, quantity: number) => {
     set((state) => {
-      state.cart.increaseProductQuantity(product,quantity);
-      return { cart: state.cart };
-    })
+      const productToIncrease = foundProductInCart(product, state.products);
+
+      if (productToIncrease) {
+        state.products = state.products?.map((cartProduct) => {
+          if (cartProduct.product === product) {
+            return {
+              ...cartProduct,
+              quantity: cartProduct.quantity + quantity,
+            };
+          } else {
+            return cartProduct;
+          }
+        });
+      }
+
+      return { products: state.products };
+    });
   },
 
-  decreaseProductQuantity: (product: Product, quantity: number)=>{
+  decreaseProductQuantity: (product: Product, quantity: number) => {
     set((state) => {
-      state.cart.decreaseProductQuantity(product,quantity);
-      return { cart: state.cart };
-    })
-  },
-})
+      if (state.products) {
+        const productToIncrease = foundProductInCart(product, state.products);
 
-);
+        if (productToIncrease) {
+          state.products = state.products?.map((cartProduct) => {
+            if (cartProduct.product === product) {
+              return {
+                ...cartProduct,
+                quantity: cartProduct.quantity - quantity,
+              };
+            } else {
+              return cartProduct;
+            }
+          });
+        }
+      }
+      return { products: state.products };
+    });
+  },
+}));
+
+function foundProductInCart(
+  product: Product,
+  cart: CartProduct[] | undefined
+): CartProduct | undefined {
+  if (cart) {
+    return cart?.find((x) => x.product === product);
+  }
+}

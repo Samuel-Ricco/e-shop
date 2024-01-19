@@ -70,7 +70,7 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
     }
 
     console.log("bottone");
-    console.log("cart", cart.cart);
+    console.log("cart", cart);
   };
 
   

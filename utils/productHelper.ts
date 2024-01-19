@@ -1,6 +1,6 @@
 import { Product } from "@/model/Product";
 
-
+//TODO spostare in un nuovo store
 export class ProductHelper {
   private static fetchData = async () => {
     const res = await fetch("https://fakestoreapi.com/products");
@@ -32,7 +32,7 @@ export class ProductHelper {
     return products;
   };
 
-  //todo
+  //TODO on ottenere tutti ma solo quello che mi serve
   static getProductFromId = async (productId: string) => {
     const products = await ProductHelper.getProducts();
     return (

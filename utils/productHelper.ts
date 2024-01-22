@@ -15,11 +15,11 @@ export class ProductHelper {
     JSONProducts.forEach((element: any) => {
       const product = new Product(
         element.id,
-        element.title,  // Correggi il nome del campo da 'name' a 'title'
+        element.title,
         element.description,
         element.price,
         element.category,
-        element.image,  // Correggi il nome del campo da 'images' a 'image'
+        element.image,
         {
           count: element.rating.count,
           rate: element.rating.rate,

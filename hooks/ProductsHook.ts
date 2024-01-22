@@ -2,34 +2,34 @@ import { Product } from "@/model/Product";
 import { create } from "zustand";
 
 type ProductHook = {
-  getProducts: () => Promise<Product[]>;
+  products: Product[];
+  getProducts: () => void;
   getProductFromId: (productId: string) => Promise<Product | null>;
 };
 
 export const useProduct = create<ProductHook>((set) => ({
 
-  getProducts: async () => {
-    const JSONProducts = await fetchData();
+  products:[],
 
-    var products: Product[] = [];
-    JSONProducts.forEach((element: any) => {
-      const product = new Product(
-        element.id,
-        element.title,
-        element.description,
-        element.price,
-        element.category,
-        element.image,
-        {
-          count: element.rating.count,
-          rate: element.rating.rate,
-        }
-      );
+  getProducts: () => {
+    fetchData().then((JSONProducts) => {
+      const fetchedProducts: Product[] = JSONProducts.map((element: any) => {
+        return new Product(
+          element.id,
+          element.title,
+          element.description,
+          element.price,
+          element.category,
+          element.image,
+          {
+            count: element.rating.count,
+            rate: element.rating.rate,
+          }
+        );
+      });
 
-      products.push(product);
+      set({ products: fetchedProducts });
     });
-
-    return products;
   },
 
     getProductFromId: async (productId: string) => {

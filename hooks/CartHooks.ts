@@ -1,6 +1,8 @@
 
 import { CartProduct } from "@/model/CartProduct";
 import { Product } from "@/model/Product";
+import { textCutter } from "@/utils/textCutter";
+import toast from "react-hot-toast";
 import { create } from "zustand";
 
 type CartHook = {
@@ -32,6 +34,7 @@ export const useCart = create<CartHook>((set) => ({
         state.products?.push(cartProduct);
       }
 
+      toast.success(`${cartProduct.quantity} ${textCutter(cartProduct.product.title)} added to your cart`)
       return { products: state.products };
     });
   },

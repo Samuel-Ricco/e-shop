@@ -38,7 +38,7 @@ const NavBar = () => {
               md:gap.12"
             >
               <div>
-                Cart
+                <Link href={"/cart"}>Cart</Link>
               </div>
 
               <div>

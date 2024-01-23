@@ -1,9 +1,9 @@
 "use client";
 
 import { Product } from "@/model/Product";
-import { ProductHelper } from "@/utils/productHelper";
+
 import { Rating } from "@mui/material";
-import PageLoader from "next/dist/client/page-loader";
+
 import React, { useCallback, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
 import HorizontalLine from "../../styleComponents/HorizontalLine";
@@ -12,6 +12,7 @@ import { CartProduct } from "@/model/CartProduct";
 import CustomButton from "../../CustomButton";
 import Image from "next/image";
 import { useCart } from "@/hooks/CartHooks";
+import { useProduct } from "@/hooks/ProductsHook";
 
 const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -19,27 +20,31 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
     null
   );
 
-  const cart = useCart();
+  const cartHook = useCart();
+  const productHook = useProduct();
+
+  const getData = () => {
+    return productHook.getProductFromId(productId);
+  };
 
   useEffect(() => {
-    async function getProduct() {
+    function getProduct() {
       try {
-        const data = await ProductHelper.getProductFromId(productId);
+        const data = getData();
         setProduct(data);
       } catch (error) {
         console.error(error);
       }
     }
     getProduct();
-    
   }, []);
 
   //todo spostare on init
   useEffect(() => {
     if (product) {
       console.log("product", product);
-      const newCartProduct = new CartProduct(product, 1)
-      console.log("cartproduct", newCartProduct )
+      const newCartProduct = new CartProduct(product, 1);
+      console.log("cartproduct", newCartProduct);
       setCartProduct(newCartProduct);
     }
   }, [product]);
@@ -66,14 +71,13 @@ const ProductDetails: React.FC<IProductDetails> = ({ productId }) => {
 
   const cartAddProduct = () => {
     if (cartProduct) {
-      cart.addProduct(cartProduct);
+      cartHook.addProduct(cartProduct);
     }
 
     console.log("bottone");
-    console.log("cart", cart);
+    console.log("cart", cartHook);
   };
 
-  
   return (
     <div>
       {product ? (

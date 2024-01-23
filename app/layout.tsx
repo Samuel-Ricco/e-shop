@@ -20,17 +20,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster toastOptions={{
-          style: {
-            border: '1px solid #ea580c',
-            padding: '16px',
-            color: '#ea580c',
-          },
-          iconTheme: {
-            primary: '#ea580c',
-            secondary: '#FFF',
-          },
-        }}/>
+        <Toaster
+          toastOptions={{
+            style: {
+              border: "1px solid #ea580c",
+              padding: "16px",
+              color: "#ea580c",
+            },
+            iconTheme: {
+              primary: "#ea580c",
+              secondary: "#FFF",
+            },
+          }}
+        />
         <div className="flex flex-col min-h-screen">
           <NavBar></NavBar>
 

@@ -98,7 +98,7 @@ const CartClient = () => {
                 text-base
                 font-semibold">
                 <span>SubTotal</span>
-                <span> total price</span>
+                <span>{`€ ${cart.getCartTotal()}`}</span>
               </div>
 
               <p className="text-slate-500">Taxes and sjipping calculated at checkout</p>

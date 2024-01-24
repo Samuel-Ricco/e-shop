@@ -3,9 +3,15 @@ import { useCart } from "@/hooks/CartHooks";
 import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import CustomButton from "../components/CustomButton";
+import CartItem from "./CartItem";
+import { useCallback } from "react";
 
 const CartClient = () => {
   const cart = useCart();
+
+  const clearCart = useCallback(()=>{
+    cart.removeAllProduct();
+  },[])
 
   return (
     <div>
@@ -65,7 +71,7 @@ const CartClient = () => {
           <div>
             {cart.products &&
               cart.products.map((item) => {
-                return <div key={item.product.id}>{item.product.title}</div>;
+                return <CartItem key={item.product.id} cartProduct={item}/>;
               })}
           </div>
 
@@ -81,7 +87,7 @@ const CartClient = () => {
                 label="Clear Cart"
                 small
                 outline
-                onClick={() => {}}
+                onClick={clearCart}
               />
             </div>
 

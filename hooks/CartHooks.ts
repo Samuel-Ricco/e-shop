@@ -85,7 +85,7 @@ export const useCart = create<CartHook>((set) => ({
             if (cartProduct.product === product) {
               return {
                 ...cartProduct,
-                quantity: Math.max(cartProduct.quantity - quantity, 0), // Ensure quantity is non-negative
+                quantity: Math.max(cartProduct.quantity - quantity, 1), // Ensure quantity is non-negative
               };
             } else {
               return cartProduct;

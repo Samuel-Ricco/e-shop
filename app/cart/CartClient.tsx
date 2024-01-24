@@ -101,7 +101,7 @@ const CartClient = () => {
                 <span> total price</span>
               </div>
 
-              <p>Taxes and sjipping calculated at checkout</p>
+              <p className="text-slate-500">Taxes and sjipping calculated at checkout</p>
 
               <CustomButton label="Checkout" onClick={()=>{}}/>
 

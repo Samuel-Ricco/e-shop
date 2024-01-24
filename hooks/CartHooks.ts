@@ -9,8 +9,11 @@ type CartHook = {
   products: CartProduct[] | undefined;
   addProduct: (cartProduct: CartProduct) => void;
   removeProduct: (cartProduct: CartProduct) => void;
+  removeAllProduct:()=>void;
   increaseProductQuantity: (product: Product, quantity: number) => void;
   decreaseProductQuantity: (product: Product, quantity: number) => void;
+  getProductTotal:(cartProduct: CartProduct) => number;
+  getCartTotal:()=>number;
 };
 
 export const useCart = create<CartHook>((set) => ({
@@ -44,6 +47,13 @@ export const useCart = create<CartHook>((set) => ({
       state.products = state.products?.filter((product) => product !== cartProduct);
       return { products: state.products };
     });
+  },
+
+  removeAllProduct:()=>{
+    set((state) =>{
+      state.products = [];
+      return { products: state.products };
+    })
   },
 
   increaseProductQuantity: (product: Product, quantity: number) => {
@@ -86,6 +96,20 @@ export const useCart = create<CartHook>((set) => ({
       return { products: state.products };
     });
   },
+
+  getProductTotal:(cartProduct:CartProduct)=>{
+    const total = cartProduct.product.price * cartProduct.quantity;
+    return total;
+  },
+
+  getCartTotal:()=>{
+    var total = 0;
+    useCart.getState().products?.forEach((cartProduct:CartProduct)=>{
+      total += (cartProduct.product.price * cartProduct.quantity);
+    })
+    return total;
+  },
+
 }));
 
 

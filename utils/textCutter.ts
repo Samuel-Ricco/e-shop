@@ -6,10 +6,10 @@ export const textCutter = (str:string)=>{
 }
 
 export const textCutterCart = (str:string)=>{
-    if(str.length < 30){
+    if(str.length < 80){
         return str;
     }
-    return str.substring(0,30) + "...";
+    return str.substring(0,80) + "...";
 }
 
 //TODO fare con css ellipsis

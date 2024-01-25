@@ -56,7 +56,8 @@ const CartClient = () => {
             className="
             grid
             grid-cols-5
-            text-xs
+            text-lg
+            font-semibold
             gap-4
             pb-2
             mt-8

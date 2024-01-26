@@ -14,6 +14,7 @@ type CartHook = {
   decreaseProductQuantity: (product: Product, quantity: number) => void;
   getProductTotal:(cartProduct: CartProduct) => number;
   getCartTotal:()=>number;
+  getCartNumber:()=>number;
 };
 
 export const useCart = create<CartHook>((set) => ({
@@ -54,6 +55,7 @@ export const useCart = create<CartHook>((set) => ({
       state.products = [];
       return { products: state.products };
     })
+    toast.success(`Your cart has been emptied`)
   },
 
   increaseProductQuantity: (product: Product, quantity: number) => {
@@ -106,6 +108,14 @@ export const useCart = create<CartHook>((set) => ({
     var total = 0;
     useCart.getState().products?.forEach((cartProduct:CartProduct)=>{
       total += (cartProduct.product.price * cartProduct.quantity);
+    })
+    return total;
+  },
+
+  getCartNumber:()=>{
+    var total = 0;
+    useCart.getState().products?.forEach((cartProduct:CartProduct)=>{
+      total += cartProduct.quantity;
     })
     return total;
   },

@@ -9,9 +9,9 @@ import { useCallback } from "react";
 const CartClient = () => {
   const cart = useCart();
 
-  const clearCart = useCallback(()=>{
+  const clearCart = useCallback(() => {
     cart.removeAllProduct();
-  },[])
+  }, []);
 
   return (
     <div>
@@ -43,46 +43,51 @@ const CartClient = () => {
         </div>
       ) : (
         <div>
-          <div className="
+          <div
+            className="
             text-4xl 
             font-bold 
             text-orange-500 
             text-center 
-            mb-4">
+            mb-4"
+          >
             Shopping Cart
           </div>
 
           <div
             className="
-            grid
-            grid-cols-5
-            text-lg
-            font-semibold
-            gap-4
-            pb-2
-            mt-8
-            items-center"
+             grid
+             grid-cols-1 md:grid-cols-5
+             text-lg font-semibold gap-4 pb-2 mt-8 items-center"
           >
-            <div className="col-span-2 justify-self-start">PRODUCT</div>
-            <div className="justify-self-center">PRICE</div>
-            <div className="justify-self-center">QUANTITY</div>
-            <div className="justify-self-end">TOTAL</div>
+            <div className="hidden md:table-cell col-span-2 justify-self-start">
+              PRODUCT
+            </div>
+            <div className="hidden md:table-cell justify-self-center">
+              PRICE
+            </div>
+            <div className="hidden md:table-cell justify-self-center">
+              QUANTITY
+            </div>
+            <div className="hidden md:table-cell justify-self-end">TOTAL</div>
           </div>
 
           <div>
             {cart.products &&
               cart.products.map((item) => {
-                return <CartItem key={item.product.id} cartProduct={item}/>;
+                return <CartItem key={item.product.id} cartProduct={item} />;
               })}
           </div>
 
-          <div className="
+          <div
+            className="
             border-t-[1.5px] 
             border-slate-200 
             py-4 
             flex 
             justify-between 
-            gap-4">
+            gap-4"
+          >
             <div className="w-[90px]">
               <CustomButton
                 label="Clear Cart"
@@ -92,41 +97,45 @@ const CartClient = () => {
               />
             </div>
 
-            <div className="
+            <div
+              className="
               text-sm
               flex
               flex-col
               gap-1
-              items-start">
-              <div className="
+              items-start"
+            >
+              <div
+                className="
                 flex
                 justify-between
                 w-full
                 text-base
-                font-semibold">
+                font-semibold"
+              >
                 <span>SubTotal</span>
-                <span>{`€ ${cart.getCartTotal()}`}</span>
+                <span className="text-2xl">{`€ ${cart.getCartTotal()}`}</span>
               </div>
 
-              <p className="text-slate-500">Taxes and sjipping calculated at checkout</p>
+              <p className="text-slate-500">
+                Taxes and sjipping calculated at checkout
+              </p>
 
-              <CustomButton label="Checkout" onClick={()=>{}}/>
+              <CustomButton label="Checkout" onClick={() => {}} />
 
               <Link
-              href={"/"}
-              className="
+                href={"/"}
+                className="
               text-slate-500
               flex
               items-center
               gap-1
               mt-2"
-            >
-              <MdArrowBack />
-              <span>Continue Shopping</span>
-            </Link>
-
+              >
+                <MdArrowBack />
+                <span>Continue Shopping</span>
+              </Link>
             </div>
-
           </div>
         </div>
       )}

@@ -31,14 +31,13 @@ const CartItem: React.FC<CartItemProps> = ({ cartProduct }) => {
     <div
       className="
       grid
-      grid-cols-5
-      text-xs
-      md:text-sm
-      gap-4
-      border-t-[1.5px]
-      border-slate-200 
-      py-4
-      items-center"
+  grid-cols-1 md:grid-cols-5
+  text-xs md:text-sm
+  gap-4
+  border-t-[1.5px]
+  border-slate-200 
+  py-4
+  items-center"
     >
       <div
         className="
@@ -86,7 +85,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartProduct }) => {
         </div>
       </div>
 
-      <div className="justify-self-center">
+      <div className="md:justify-self-center justify-self-start">
         {priceFormatter(cartProduct.product.price)}
       </div>
 
@@ -98,7 +97,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartProduct }) => {
         />
       </div>
 
-      <div className="justify-self-end font-semibold">
+      <div className="justify-self-end col-span-2 text-lg font-semibold md:col-start-[5] ">
         € {cart.getProductTotal(cartProduct)}
       </div>
     </div>

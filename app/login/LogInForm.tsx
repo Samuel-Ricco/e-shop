@@ -4,6 +4,7 @@ import { useState } from "react";
 import Input from "../inputs/Input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CustomButton from "../components/CustomButton";
+import { useLogIn } from "@/hooks/LogInHooks";
 
 const LogInForm = () => {
   const [isLoading, SetIsLoading] = useState(false);
@@ -18,9 +19,19 @@ const LogInForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const logIn = useLogIn();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     SetIsLoading(true);
-    console.log(data);
+
+    try {
+      await logIn.auth(data.email, data.password);
+      console.log(logIn.token);
+    } catch (error) {
+      console.error("Error during login:", error);
+    } finally {
+      SetIsLoading(false);
+    }
   };
 
   return (

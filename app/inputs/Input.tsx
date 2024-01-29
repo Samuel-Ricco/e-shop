@@ -7,7 +7,7 @@ interface InputProps{
   label: string,
   type?:string,
   disabled?: boolean,
-  required?: boolean,
+  required?: boolean, 
   register: UseFormRegister<FieldValues> 
   errors: FieldErrors
 }
@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
         p-4
         pt-6
         outline-none
-        by-white
+        bg-white
         font-light
         border-2
         rounded-md
@@ -61,7 +61,7 @@ const Input: React.FC<InputProps> = ({
         peer-placeholder-shown:scale-100
         peer-placeholder-shown:translate-y-0
         peer-focus:scale-75
-        peer-focus:translate-y-4"  
+        peer-focus:-translate-y-4"  
     >
       {label}
     </label>

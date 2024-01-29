@@ -1,10 +1,11 @@
 import FormWrap from "../components/FormWrap";
 import Container from "../components/container/Container";
+import LogInForm from "./LogInForm";
 
 const LogIn = () => {
   return (  <Container>
     <FormWrap>
-      <div></div>
+      <LogInForm/>
     </FormWrap>
   </Container>);
 }
